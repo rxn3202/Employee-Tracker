@@ -124,5 +124,22 @@ function viewEmployees() {
       });
   }
 
+//Add a department
+function addDepartment() {
+
+}
+//Add a role
+function addRole() {
+
+}
+//Add an employee
+function addEmployee() {
+
+}
+//Update an employee role
+function updateEmployeeRole() {
+
+}
+
 
 promptAction();
