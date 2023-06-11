@@ -151,35 +151,52 @@ function addDepartment() {
 
 //Add a role
 function addRole() {
-  const sql = 'SELECT * FROM department';
-  executeQuery(sql)
-    .then((departments) => {
-      inquirer
-        .prompt([
-          {
-            type: 'input',
-            name: 'title',
-            message: 'Enter the title of the role:',
-          },
-          {
-            type: 'number',
-            name: 'salary',
-            message: 'Enter the salary for the role:',
-          },
-          {
-            type: 'list',
-            name: 'department_id',
-            message: 'Select the department for the role:',
-            choices: departments.map((department) => ({
-              name: department.name,
-              value: department.id,
-            })),
-          },
-        ])
-        .then((answers) => {
-            
-        })
-}
+    const sql = 'SELECT * FROM department';
+    executeQuery(sql)
+      .then((departments) => {
+        inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'title',
+              message: 'Enter the title of the role:',
+            },
+            {
+              type: 'number',
+              name: 'salary',
+              message: 'Enter the salary for the role:',
+            },
+            {
+              type: 'list',
+              name: 'department_id',
+              message: 'Select the department for the role:',
+              choices: departments.map((department) => ({
+                name: department.name,
+                value: department.id,
+              })),
+            },
+          ])
+          .then((answers) => {
+            const sql =
+              'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
+            const params = [answers.title, answers.salary, answers.department_id];
+            executeQuery(sql, params)
+              .then(() => {
+                console.log('Role added successfully!');
+                promptAction();
+              })
+              .catch((error) => {
+                console.log('An error occurred while adding the role:', error);
+                promptAction();
+              });
+          });
+      })
+      .catch((error) => {
+        console.log('An error occurred while retrieving departments:', error);
+        promptAction();
+      });
+  }
+  
 //Add an employee
 function addEmployee() {
     const sql = 'SELECT * FROM ';
