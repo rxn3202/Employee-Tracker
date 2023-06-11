@@ -126,16 +126,29 @@ function viewEmployees() {
 
 //Add a department
 function addDepartment() {
-    const sql = 'SELECT * FROM department';
-    executeQuery(sql)
-      .then((departments) => {
-        inquirer
-          .prompt([
-            {
-
-            }
-          ])
-}
+    inquirer
+      .prompt([
+        {
+          type: 'input',
+          name: 'name',
+          message: 'Enter the name of the department:',
+        },
+      ])
+      .then((answers) => {
+        const sql = 'INSERT INTO department (name) VALUES (?)';
+        const params = [answers.name];
+        executeQuery(sql, params)
+          .then(() => {
+            console.log('Department added successfully!');
+            promptAction();
+          })
+          .catch((error) => {
+            console.log('An error occurred while adding the department:', error);
+            promptAction();
+          });
+      });
+  }
+  
 //Add a role
 function addRole() {
     const sql = 'SELECT * FROM ';
