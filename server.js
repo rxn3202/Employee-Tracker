@@ -126,19 +126,51 @@ function viewEmployees() {
 
 //Add a department
 function addDepartment() {
+    const sql = 'SELECT * FROM department';
+    executeQuery(sql)
+      .then((departments) => {
+        inquirer
+          .prompt([
+            {
 
+            }
+          ])
 }
 //Add a role
 function addRole() {
-
+    const sql = 'SELECT * FROM ';
+    executeQuery(sql)
+      .then((departments) => {
+        inquirer
+          .prompt([
+            {
+                
+            }
+          ])
 }
 //Add an employee
 function addEmployee() {
-
+    const sql = 'SELECT * FROM ';
+    executeQuery(sql)
+      .then((departments) => {
+        inquirer
+          .prompt([
+            {
+                
+            }
+          ])
 }
 //Update an employee role
 function updateEmployeeRole() {
-
+    const sql = 'SELECT * FROM ';
+    executeQuery(sql)
+      .then((departments) => {
+        inquirer
+          .prompt([
+            {
+                
+            }
+          ])
 }
 
 
