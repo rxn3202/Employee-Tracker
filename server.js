@@ -148,18 +148,37 @@ function addDepartment() {
           });
       });
   }
-  
+
 //Add a role
 function addRole() {
-    const sql = 'SELECT * FROM ';
-    executeQuery(sql)
-      .then((departments) => {
-        inquirer
-          .prompt([
-            {
-                
-            }
-          ])
+  const sql = 'SELECT * FROM department';
+  executeQuery(sql)
+    .then((departments) => {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'title',
+            message: 'Enter the title of the role:',
+          },
+          {
+            type: 'number',
+            name: 'salary',
+            message: 'Enter the salary for the role:',
+          },
+          {
+            type: 'list',
+            name: 'department_id',
+            message: 'Select the department for the role:',
+            choices: departments.map((department) => ({
+              name: department.name,
+              value: department.id,
+            })),
+          },
+        ])
+        .then((answers) => {
+            
+        })
 }
 //Add an employee
 function addEmployee() {
