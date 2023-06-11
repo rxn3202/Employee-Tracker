@@ -55,8 +55,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ## Technologies Used
 
-- HTML
-- CSS
 - Node.js
 - Inquirer
 - MySQL
+- Dotenv
