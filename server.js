@@ -61,17 +61,34 @@ function promptAction() {
         })
 }
 
-// View all deparments
+// View all departments
 function viewDepartments() {
-    const sql = 'SELECT * FROM deparment';
+    const sql = 'SELECT * FROM department';
     executeQuery(sql)
-        .then((results) => {
-            console.table(results);
-            promptAction();
-        })
-        .catch((error) => {
-            console.log('An error occurred while retrieving departments:', error);
-            promptAction();
-        });
-}
+      .then((results) => {
+        console.table(results);
+        promptAction();
+      })
+      .catch((error) => {
+        console.log('An error occurred while retrieving departments:', error);
+        promptAction();
+      });
+  }
+  
+  // View all roles
+  function viewRoles() {
+    const sql = 'SELECT role.*, department.name AS department_name FROM role JOIN department ON role.department_id = department.id';
+    executeQuery(sql)
+      .then((results) => {
+        console.table(results);
+        promptAction();
+      })
+      .catch((error) => {
+        console.log('An error occurred while retrieving roles:', error);
+        promptAction();
+      });
+  }
+
+
+
 promptAction();
