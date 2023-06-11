@@ -1,3 +1,4 @@
+const { default: inquirer } = require('inquirer');
 const mysql = require('mysql2');
 require('dotenv').config();
 
@@ -25,4 +26,52 @@ function executeQuery(sql, params) {
   });
 }
 
+function promptAction() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'action',
+                message: 'What would you like to do?',
+                choices: [
+                    'View all departments',
+                    'View all roles',
+                    'Veiw all employees',
+                    'Add a deparment',
+                    'Add a role',
+                    'Add an employee',
+                    'Update an employee role',
+                    'Exit',
+                ],
+            },
+        ])
+        .then((answers) => {
+            switch (answers.action) {
+                case 'View all deparments':
+                    viewDepartments();
+                    break;
+                case ''
+                case ''
+                case ''
+                case ''
+                case ''
+                case ''
+                case ''    
+            }
+        })
+}
+
+// View all deparments
+function viewDepartments() {
+    const sql = 'SELECT * FROM deparment';
+    executeQuery(sql)
+        .then((results) => {
+            console.table(results);
+            promptAction();
+        })
+        .catch((error) => {
+            console.log('An error occurred while retrieving departments:', error);
+            promptAction();
+        });
+}
 promptAction();
