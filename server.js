@@ -255,18 +255,62 @@ function addEmployee() {
         promptAction();
       });
   }
-  
+
 //Update an employee role
 function updateEmployeeRole() {
-    const sql = 'SELECT * FROM ';
-    executeQuery(sql)
-      .then((departments) => {
-        inquirer
-          .prompt([
-            {
-                
-            }
-          ])
+  const sql = 'SELECT * FROM employee';
+  executeQuery(sql)
+    .then((employees) => {
+      const employeeChoices = employees.map((employee) => ({
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id,
+      }));
+
+      executeQuery('SELECT * FROM role')
+        .then((roles) => {
+          const roleChoices = roles.map((role) => ({
+            name: role.title,
+            value: role.id,
+          }));
+
+          inquirer
+            .prompt([
+              {
+                type: 'list',
+                name: 'employee_id',
+                message: 'Select the employee whose role you want to update:',
+                choices: employeeChoices,
+              },
+              {
+                type: 'list',
+                name: 'role_id',
+                message: 'Select the new role for the employee:',
+                choices: roleChoices,
+              },
+            ])
+            .then((answers) => {
+              const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
+              const params = [answers.role_id, answers.employee_id];
+              executeQuery(sql, params)
+                .then(() => {
+                  console.log('Employee role updated successfully!');
+                  promptAction();
+                })
+                .catch((error) => {
+                  console.log('An error occurred while updating the role:', error);
+                  promptAction();
+                });
+            });
+        })
+        .catch((error) => {
+          console.log('An error occurred while retrieving roles:', error);
+          promptAction();
+        });
+    })
+    .catch((error) => {
+      console.log('An error occurred while retrieving employees:', error);
+      promptAction();
+    });
 }
 
 
