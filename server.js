@@ -196,19 +196,66 @@ function addRole() {
         promptAction();
       });
   }
-  
-//Add an employee
+
+// Add an employee
 function addEmployee() {
-    const sql = 'SELECT * FROM ';
+    const sql = 'SELECT * FROM role';
     executeQuery(sql)
-      .then((departments) => {
+      .then((roles) => {
         inquirer
           .prompt([
             {
-                
-            }
+              type: 'input',
+              name: 'first_name',
+              message: "Enter the employee's first name:",
+            },
+            {
+              type: 'input',
+              name: 'last_name',
+              message: "Enter the employee's last name:",
+            },
+            {
+              type: 'list',
+              name: 'role_id',
+              message: "Select the employee's role:",
+              choices: roles.map((role) => ({
+                name: role.title,
+                value: role.id,
+              })),
+            },
+            {
+              type: 'input',
+              name: 'manager_id',
+              message: "Enter the employee's manager ID (leave empty if none):",
+              default: null,
+            },
           ])
-}
+          .then((answers) => {
+            const sql =
+              'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+            const params = [
+              answers.first_name,
+              answers.last_name,
+              answers.role_id,
+              answers.manager_id,
+            ];
+            executeQuery(sql, params)
+              .then(() => {
+                console.log('Employee added successfully!');
+                promptAction();
+              })
+              .catch((error) => {
+                console.log('An error occurred while adding the employee:', error);
+                promptAction();
+              });
+          });
+      })
+      .catch((error) => {
+        console.log('An error occurred while retrieving roles:', error);
+        promptAction();
+      });
+  }
+  
 //Update an employee role
 function updateEmployeeRole() {
     const sql = 'SELECT * FROM ';
