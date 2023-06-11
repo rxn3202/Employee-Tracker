@@ -48,10 +48,13 @@ WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 ## Mock up
-[Video Preview](https://www.youtube.com/watch?v=0qxbvU-HXE0&ab_channel=richnguyen)
+[Video Preview](https://www.youtube.com/watch?v=tllkBYpYJ80&ab_channel=richnguyen)
 
-![alt text](./assets/images/home%20page.png)
-![alt text](./assets/images/test%201.png)
+![alt text](./assets/images/test1.png)
+![alt text](./assets/images/test2.png)
+![alt text](./assets/images/test3.png)
+![alt text](./assets/images/test4.png)
+![alt text](./assets/images/test5.png)
 
 ## Technologies Used
 
